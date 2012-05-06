@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     expert = Expert.find_by_email_address(params[:session][:email])
     if expert && expert.authenticate(params[:session][:password])
       sign_in expert
-      redirect_to expert
+      redirect_back_or expert
     else
       flash.now[:error] = 'Invalid email/password combination'
       render 'new'

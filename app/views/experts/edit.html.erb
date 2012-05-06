@@ -1,6 +1,61 @@
-<h1>Editing expert</h1>
+<% provide(:title, "Edit user") %> 
+<h1>Update your profile</h1>
 
-<%= render 'form' %>
+<div class="row">
+  <div class="span6 offset3">  
+<%= form_for(@expert) do |f| %>
+<% if @expert.errors.any? %>
+	  <div id="error_explanation">
+  <div class="alert alert-error">
+    The form contains <%= pluralize(@expert.errors.count, "error") %>.
+  </div>
+  <ul>
+    <% @expert.errors.full_messages.each do |msg| %>
+    <li>
+      * <%= msg %>
+    </li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-<%= link_to 'Show', @expert %> |
-<%= link_to 'Back', experts_path %>
+  <div class="field">
+  <%= f.label :first_name %><br />
+  <%= f.text_field :first_name %>
+</div>
+<div class="field">
+  <%= f.label :last_name %><br />
+  <%= f.text_field :last_name %>
+</div>
+<div class="field">
+  <%= f.label :email_address %><br />
+  <%= f.text_field :email_address %>
+</div>
+<div class="field">
+  <%= f.label :password %><br />
+  <%= f.text_field :password %>
+</div>
+<div class="field">
+  <%= f.label :password_confirmation %><br />
+  <%= f.text_field :password_confirmation %>
+</div>
+<div class="field">
+  <%= f.label :topics_of_interest %><br />
+  <%= f.text_field :topics_of_interest %>
+</div>
+<div class="field">
+  <%= f.label :expertise %><br />
+  <%= f.text_field :expertise %>
+</div>
+<div class="field">
+  <%= f.label :professional_bio %><br />
+  <%= f.text_field :professional_bio %>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
+
+<%= gravatar_for @expert %>
+<a href="http://gravatar.com/emails">change</a>
+<% end %>
+

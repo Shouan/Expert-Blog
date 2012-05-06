@@ -1,33 +1,19 @@
-<h1>Listing experts</h1>
+<%= provide(:title, 'All users') %>
+<h1>All users</h1>
 
-<table>
-  <tr>
-    <th>First name</th>
-    <th>Last name</th>
-    <th>Email address</th>
-    <th>Topics of interest</th>
-    <th>Expertise</th>
-    <th>Professional bio</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<%= will_paginate %>
 
-<% @experts.each do |expert| %>
-  <tr>
-    <td><%= expert.first_name %></td>
-    <td><%= expert.last_name %></td>
-    <td><%= expert.email_address %></td>
-    <td><%= expert.topics_of_interest %></td>
-    <td><%= expert.expertise %></td>
-    <td><%= expert.professional_bio %></td>
-    <td><%= link_to 'Show', expert %></td>
-    <td><%= link_to 'Edit', edit_expert_path(expert) %></td>
-    <td><%= link_to 'Destroy', expert, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
-</table>
+<ul class="users">
+  <% @experts.each do |expert| %>
+  <li>
+    <%= gravatar_for expert %>
+      <%= link_to expert.first_name, expert %>
+        <% if current_expert.admin? && !current_expert?(expert) %>
+          | <%= link_to "delete", expert, method: :delete, confirm: "You sure?" %>
+        <% end %>
+    </li>
+    
+  <% end %>
+</ul>
 
-<br />
-
-<%= link_to 'New Expert', new_expert_path %>
+<%= will_paginate %>

@@ -1,8 +1,12 @@
 class ExpertsController < ApplicationController
+  before_filter :signed_in_expert, only: [:index, :edit, :update, :destroy]
+  before_filter :correct_expert,   only: [:edit, :update]
+  before_filter :admin_expert,     only: :destroy
+
   # GET /experts
   # GET /experts.json
   def index
-    @experts = Expert.all
+    @experts = Expert.paginate(page: params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -62,7 +66,10 @@ class ExpertsController < ApplicationController
 
     respond_to do |format|
       if @expert.update_attributes(params[:expert])
-        format.html { redirect_to @expert, notice: 'Expert was successfully updated.' }
+	    flash[:success] = "Profile updated"
+		sign_in @expert
+
+        format.html { redirect_to @expert }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -78,8 +85,27 @@ class ExpertsController < ApplicationController
     @expert.destroy
 
     respond_to do |format|
+	  flash[:success] = "User destroyed."
       format.html { redirect_to experts_url }
       format.json { head :ok }
     end
   end
+
+  private
+
+    def signed_in_expert
+      unless signed_in?
+        store_location
+        redirect_to signin_path, notice: "Please sign in."
+      end
+    end
+
+    def correct_expert
+      @expert = Expert.find(params[:id])
+      redirect_to(root_path) unless current_expert?(@expert)
+    end
+
+	def admin_expert
+      redirect_to(root_path) unless current_expert.admin?
+    end
 end
