@@ -1,14 +1,49 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>ExpertBlog</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>Expert Finder</title>
+    <%= stylesheet_link_tag    "application", media: "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
 
-<%= yield %>
+  <body>
+    <header class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <nav>
+            <ul class="nav pull-left">
+              <li><%= link_to "Home",    root_path %></li>
+              <li><%= link_to "View Experts",  experts_path %></li>
+              <li><%= link_to "Sign up", new_expert_path %></li>
+            </ul>
+			<ul class="nav pull-right">
+              <li><%= link_to "Inbox",    '#' %></li>
+              <li><%= link_to "Sign in", '#' %></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
 
-</body>
+    <div class="container">
+      <%= yield %>
+    </div>
+
+	<footer class="footer">
+	  <hr/>
+	  <div class="container">
+		<small>
+		<a href="http://ExpertFinder.org/">Expert Finder</a>
+		by Shovan B. Swartz
+		</small>
+	  </div>
+	</footer>
+	<br/>
+	<%= debug(params) if Rails.env.development? %>
+
+  </body>
 </html>

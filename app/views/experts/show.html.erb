@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First name:</b>
+  <%= @expert.first_name %>
+</p>
+
+<p>
+  <b>Last name:</b>
+  <%= @expert.last_name %>
+</p>
+
+<p>
+  <b>Email address:</b>
+  <%= @expert.email_address %>
+</p>
+
+<p>
+  <b>Topics of interest:</b>
+  <%= @expert.topics_of_interest %>
+</p>
+
+<p>
+  <b>Expertise:</b>
+  <%= @expert.expertise %>
+</p>
+
+<p>
+  <b>Professional bio:</b>
+  <%= @expert.professional_bio %>
+</p>
+
+
+<%= link_to 'Edit', edit_expert_path(@expert) %> |
+<%= link_to 'Back', experts_path %>
