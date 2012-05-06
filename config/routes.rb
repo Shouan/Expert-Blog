@@ -7,6 +7,12 @@ ExpertBlog::Application.routes.draw do
 
   resources :experts
 
+  resources :sessions, only: [:new, :create, :destroy]
+
+  match '/signup',  to: 'experts#new'
+  match '/signin',  to: 'sessions#new'
+  match '/signout', to: 'sessions#destroy', via: :delete
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -22,7 +22,8 @@
             </ul>
 			<ul class="nav pull-right">
               <li><%= link_to "Sign up", new_expert_path %></li>
-              <li><%= link_to "Sign in", '#' %></li>
+              <li><%= link_to "Sign in", signin_path %></li>
+			  <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
             </ul>
           </nav>
         </div>
@@ -30,6 +31,9 @@
     </header>
 
     <div class="container">
+		<% flash.each do |key, value| %>
+		  <div class="alert alert-<%= key %>"><%= value %></div>
+		<% end %> 
       <%= yield %>
     </div>
 

@@ -44,7 +44,9 @@ class ExpertsController < ApplicationController
 
     respond_to do |format|
       if @expert.save
-        format.html { redirect_to @expert, notice: 'Expert was successfully created.' }
+		sign_in @expert
+
+        format.html { redirect_to @expert, notice: @expert.first_name + ' was successfully created.' }
         format.json { render json: @expert, status: :created, location: @expert }
       else
         format.html { render action: "new" }

@@ -1,6 +1,7 @@
 class Expert < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email_address, :expertise, :professional_bio, :topics_of_interest, :password, :password_confirmation
   before_save { |experts| experts.email_address = email_address.downcase }
+  before_save :create_remember_token
   has_many :posts
   has_secure_password
 
@@ -14,4 +15,10 @@ class Expert < ActiveRecord::Base
 
   validates :expertise, :presence => true
   validates :professional_bio, :length => { :maximum => 500, :too_long => "%{count} characters is the maximum allowed" }
+
+  private
+
+    def create_remember_token
+      self.remember_token = SecureRandom.urlsafe_base64
+    end
 end
