@@ -32,6 +32,14 @@
   <%= @expert.professional_bio %>
 </p>
 
-
+  <div class="span8">
+    <% if @expert.posts.any? %>
+      <h3>Posts (<%= @expert.posts.count %>)</h3>
+      <ol class="microposts">
+        <%= render @posts %>
+      </ol>
+      <%= will_paginate @posts %>
+    <% end %>
+  </div>
 <%= link_to 'Edit', edit_expert_path(@expert) %> |
 <%= link_to 'Back', experts_path %>

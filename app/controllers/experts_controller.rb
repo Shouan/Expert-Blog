@@ -18,6 +18,7 @@ class ExpertsController < ApplicationController
   # GET /experts/1.json
   def show
     @expert = Expert.find(params[:id])
+	@posts = @expert.posts.paginate(page: params[:page])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -93,12 +94,7 @@ class ExpertsController < ApplicationController
 
   private
 
-    def signed_in_expert
-      unless signed_in?
-        store_location
-        redirect_to signin_path, notice: "Please sign in."
-      end
-    end
+
 
     def correct_expert
       @expert = Expert.find(params[:id])

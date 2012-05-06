@@ -3,7 +3,7 @@ ExpertBlog::Application.routes.draw do
 
   get "index/home_page"
 
-  resources :posts
+  resources :posts, only: [:create, :destroy]
 
   resources :experts
 

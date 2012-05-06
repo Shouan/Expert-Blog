@@ -4,6 +4,13 @@ module SessionsHelper
     current_expert = expert
   end
 
+      def signed_in_expert
+      unless signed_in?
+        store_location
+        redirect_to signin_path, notice: "Please sign in."
+      end
+    end
+
   def current_expert=(expert)
     @current_expert = expert
   end

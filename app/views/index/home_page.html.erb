@@ -1,4 +1,40 @@
 <% provide(:title, 'Home') %>
 
-<h1>Index#home_page</h1>
-<p>Find me in app/views/index/home_page.html.erb</p>
+<% if signed_in? %>
+  <div class="row">
+    <aside class="span4">
+      <section>
+		<a href="<%= expert_path(current_expert) %>">
+			<%= gravatar_for current_expert %>
+		</a>
+		<h1>
+			<%= current_expert.first_name %>
+		</h1>
+		<span>
+			<%= link_to "view my profile", current_expert %>
+		</span>
+		<span>
+			<%= pluralize(current_expert.posts.count, "posts") %>
+		</span>
+      </section>
+      <section>
+			<%= form_for(@post) do |f| %>
+
+		  <div class="field">
+			<%= f.text_area :content, placeholder: "Compose new micropost..." %>
+		  </div>
+		  <%= f.submit "Post", class: "btn btn-large btn-primary" %>
+		<% end %>
+      </section>
+    </aside>
+
+	<div class="span8">
+      <h3>Micropost Feed</h3>
+      <%= render 'shared/feed' %>
+    </div>
+  </div>  
+<% else %>
+	<h1>Index#home_page</h1>
+	<p>Find me in app/views/index/home_page.html.erb</p>
+<% end %> 
+

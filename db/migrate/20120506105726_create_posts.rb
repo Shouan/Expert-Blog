@@ -7,5 +7,6 @@ class CreatePosts < ActiveRecord::Migration
 
       t.timestamps
     end
+	add_index :posts, [:expert_id, :created_at]
   end
 end

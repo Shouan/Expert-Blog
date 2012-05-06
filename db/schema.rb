@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506205256) do
+ActiveRecord::Schema.define(:version => 20120506215706) do
 
   create_table "experts", :force => true do |t|
     t.string   "first_name"
@@ -31,7 +31,6 @@ ActiveRecord::Schema.define(:version => 20120506205256) do
   add_index "experts", ["remember_token"], :name => "index_experts_on_remember_token"
 
   create_table "posts", :force => true do |t|
-    t.string   "title"
     t.string   "content"
     t.integer  "expert_id"
     t.datetime "created_at"

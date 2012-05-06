@@ -2,7 +2,7 @@ class Expert < ActiveRecord::Base
   attr_accessible :first_name, :last_name, :email_address, :expertise, :professional_bio, :topics_of_interest, :password, :password_confirmation
   before_save { |experts| experts.email_address = email_address.downcase }
   before_save :create_remember_token
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_secure_password
 
   validates :first_name, :presence => true, length: { maximum: 50 }
@@ -15,6 +15,10 @@ class Expert < ActiveRecord::Base
 
   validates :expertise, :presence => true
   validates :professional_bio, :length => { :maximum => 500, :too_long => "%{count} characters is the maximum allowed" }
+
+def feed
+  posts
+end
 
   private
 

@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+before_filter :signed_in_expert, only: [:create, :destroy]
+before_filter :correct_expert,   only: :destroy
+
   # GET /posts
   # GET /posts.json
   def index
@@ -40,14 +43,16 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(params[:post])
+    @post = current_expert.posts.build(params[:post])
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+	  flash[:success] = "Post created!"
+        format.html { redirect_to root_path }
         format.json { render json: @post, status: :created, location: @post }
       else
-        format.html { render action: "new" }
+	    @feed_items = []
+        render 'index/home_page'
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -72,12 +77,15 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post = Post.find(params[:id])
     @post.destroy
-
-    respond_to do |format|
-      format.html { redirect_to posts_url }
-      format.json { head :ok }
-    end
+    redirect_back_or root_path
   end
+
+    private
+
+    def correct_expert
+      @post = current_expert.posts.find_by_id(params[:id])
+	rescue
+		redirect_to root_path
+    end
 end

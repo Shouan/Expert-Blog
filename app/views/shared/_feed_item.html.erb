@@ -1,0 +1,10 @@
+<li id="<%= feed_item.id %>">
+  <%= link_to gravatar_for(feed_item.expert), feed_item.expert %>
+  <span class="expert">
+    <%= link_to feed_item.expert.first_name, feed_item.expert %>
+  </span>
+  <span class="content"><%= feed_item.content %></span>
+  <span class="timestamp">
+    Posted <%= time_ago_in_words(feed_item.created_at) %> ago.
+  </span>
+</li>
