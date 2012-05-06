@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120506105726) do
+ActiveRecord::Schema.define(:version => 20120506130305) do
 
   create_table "experts", :force => true do |t|
     t.string   "first_name"
@@ -22,7 +22,10 @@ ActiveRecord::Schema.define(:version => 20120506105726) do
     t.string   "professional_bio"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
+
+  add_index "experts", ["email_address"], :name => "index_experts_on_email_address", :unique => true
 
   create_table "posts", :force => true do |t|
     t.string   "title"
