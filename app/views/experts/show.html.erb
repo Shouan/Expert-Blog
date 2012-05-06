@@ -1,5 +1,7 @@
+<% provide(:title, @expert.first_name) %>
 <p id="notice"><%= notice %></p>
 
+<%= gravatar_for @expert %>
 <p>
   <b>First name:</b>
   <%= @expert.first_name %>

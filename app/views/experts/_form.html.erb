@@ -1,15 +1,18 @@
 <%= form_for(@expert) do |f| %>
-  <% if @expert.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@expert.errors.count, "error") %> prohibited this expert from being saved:</h2>
+	<% if @expert.errors.any? %>
+	  <div id="error_explanation">
+		<div class="alert alert-error">
+		  The form contains <%= pluralize(@expert.errors.count, "error") %>.
+		</div>
+		<ul>
+		<% @expert.errors.full_messages.each do |msg| %>
+		  <li>* <%= msg %></li>
+		<% end %>
+		</ul>
+	  </div>
+	<% end %>
 
-      <ul>
-      <% @expert.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+
 
   <div class="field">
     <%= f.label :first_name %><br />
