@@ -8,54 +8,57 @@
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+
+	
   </head>
 
   <body>
-    <header class="navbar">
-      <div class="navbar-inner">
-        <div class="container">
-          <nav>
-            <ul class="nav pull-left">
-              <li><%= link_to "Home",    root_path %></li>
-              <li><%= link_to "View Experts",  experts_path %></li>
-			  <li><%= link_to "About us",    index_about_page_path %></li>
-              <li><%= link_to "Sign up", new_expert_path %></li>
-            </ul>
-			<ul class="nav pull-right">
-          <% if signed_in? %>
-            
+  <header>
+	<div class="wrapper">
+		<table style="width:100%">
+			<tr>
+		<td><h1 >Expert Blog</h1></td>
+		<td><ul class="nav pull-right">
+			<li><%= link_to "Home",    root_path %></li>
+            <li><%= link_to "Experts",  experts_path %></li>
+			<li><%= link_to "About us",    index_about_page_path %></li>
+            <li><%= link_to "Sign up", new_expert_path %></li>
+			          <% if signed_in? %>
                 <li><%= link_to "Profile", current_expert %></li>
                 <li><%= link_to "Settings", edit_expert_path(current_expert) %></li>
                 <li><%= link_to "Sign out", signout_path, method: "delete" %></li>
-
             </li>
           <% else %>
             <li><%= link_to "Sign in", signin_path %></li>
           <% end %>
-			</ul>
-      </nav>
-        </div>
-      </div>
-    </header>
+		</ul></td>
+		</tr>
+		</table>
+	</div><!--.wrapper-->
+</header>
 
-    <div class="container">
-		<% flash.each do |key, value| %>
+<section class="home_feature">
+	<div class="wrapper">
+	<br/>
+			<% flash.each do |key, value| %>
 		  <div class="alert alert-<%= key %>"><%= value %></div>
 		<% end %> 
       <%= yield %>
-    </div>
+	</div><!--.wrapper-->
+</section>
+	
 
-	<footer class="footer">
-	  <hr/>
+	<footer class="footer" >
 	  <div class="container">
+	  <hr/>
 		<small>
-		<a href="http://ExpertFinder.org/">Expert Finder</a>
-		by Shovan B. Swartz
+		Expert Blog
+		<a href="mailto:shovan.swartz@gmail.com">by Shovan B. Swartz</a>
 		</small>
 	  </div>
 	</footer>
 	<br/>
-	<%= debug(params) if Rails.env.development? %>
+
 
   </body>
 </html>

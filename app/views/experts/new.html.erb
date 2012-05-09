@@ -1,5 +1,72 @@
-<h1>New expert</h1>
+<% provide(:title, "Nominate self as an Expert") %> 
 
-<%= render 'form' %>
+<article class="main_display">
+  <img src="/assets/logo.png"/>
+  <div class="display_gloss"></div>
+  <article class="banner_new">
+    <p>New</p>
+  </article>
+</article>
+<article class="feature_text">
+  <h2>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</h2>
+  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere maecenas faucibus mollis interdum. Velit aliquet. Maecenas faucibus mollis posuere velit aliquet interdum.</p>
+</article>
 
-<%= link_to 'Back', experts_path %>
+<div class="row">
+  <aside class="span8">
+    <h1>Nominate self as an Expert</h1>
+    <%= form_for(@expert) do |f| %>
+    <% if @expert.errors.any? %>
+	  <div >
+      <div class="alert alert-error">
+        The form contains <%= pluralize(@expert.errors.count, "error") %>.
+      </div>
+      <ul>
+        <% @expert.errors.full_messages.each do |msg| %>
+        <li>
+          * <%= msg %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+
+  <div class="field">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name %>
+    </div>
+    <div class="field">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name %>
+    </div>
+    <div class="field">
+      <%= f.label :email_address %>
+      <%= f.text_field :email_address %>
+    </div>
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %>
+      </div>
+    <div class="field">
+      <%= f.label :topics_of_interest %>
+      <%= f.text_field :topics_of_interest %>
+    </div>
+    <div class="field">
+      <%= f.label :expertise %>
+      <%= f.text_field :expertise %>
+    </div>
+    <div class="field">
+      <%= f.label :professional_bio %>
+      <%= f.text_area :professional_bio %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+      </div>
+  </div>
+</div>
+<% end %>

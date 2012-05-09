@@ -1,3 +1,15 @@
+<article class="main_display">
+	<img src="/assets/logo.png"/>
+	<div class="display_gloss"></div>
+	<article class="banner_new"><p>New</p></article>
+</article>
+<article class="feature_text">
+	<h2>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</h2>
+	<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere maecenas faucibus mollis interdum. Velit aliquet. Maecenas faucibus mollis posuere velit aliquet interdum.</p>
+</article>
+
+  <div class="row">
+    <aside class="span8">
 <%= form_for(@expert) do |f| %>
 	<% if @expert.errors.any? %>
 	  <div id="error_explanation">
@@ -48,4 +60,6 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+        </div>
+  </div> 
 <% end %>

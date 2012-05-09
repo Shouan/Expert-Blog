@@ -1,19 +1,40 @@
-<%= provide(:title, 'All users') %>
-<h1>All users</h1>
+<%= provide(:title, "View Experts") %>
+
+<article class="main_display">
+	<img src="/assets/logo.png"/>
+	<div class="display_gloss"></div>
+	<article class="banner_new"><p>New</p></article>
+</article>
+<article class="feature_text">
+	<h2>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</h2>
+	<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere maecenas faucibus mollis interdum. Velit aliquet. Maecenas faucibus mollis posuere velit aliquet interdum.</p>
+</article>
+
+  <div class="row">
+    <aside class="span8">
+<h1>View Experts</h1>
+ 
 
 <%= will_paginate %>
 
+  <div class="row">
+    <aside class="span8">
 <ul class="users">
   <% @experts.each do |expert| %>
   <li>
     <%= gravatar_for expert %>
-      <%= link_to expert.first_name, expert %>
-        <% if current_expert.admin? && !current_expert?(expert) %>
-          | <%= link_to "delete", expert, method: :delete, confirm: "You sure?" %>
+      <b>First name:  </b><%= link_to expert.first_name, expert %><br/><b>Last name:   </b><%= link_to expert.last_name, expert %><br/><b>Expertise: </b><%= link_to expert.expertise, expert %><br/>
+        <%= link_to "Show", expert%>
+		<% if current_expert.admin? && !current_expert?(expert) %>
+		<%= link_to "delete", expert, method: :delete, confirm: "You sure?" %>
+          
         <% end %>
     </li>
     
   <% end %>
 </ul>
-
+    </div>
+  </div>  
+      </div>
+  </div> 
 <%= will_paginate %>

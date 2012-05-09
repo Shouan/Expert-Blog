@@ -1,8 +1,18 @@
 <% provide(:title, 'Home') %>
 
+<article class="main_display">
+	<img src="/assets/logo.png"/>
+	<div class="display_gloss"></div>
+	<article class="banner_new"><p>New</p></article>
+</article>
+<article class="feature_text">
+	<h2>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</h2>
+	<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere maecenas faucibus mollis interdum. Velit aliquet. Maecenas faucibus mollis posuere velit aliquet interdum.</p>
+</article>
+
 <% if signed_in? %>
   <div class="row">
-    <aside class="span4">
+    <aside class="span8">
       <section>
 		<a href="<%= expert_path(current_expert) %>">
 			<%= gravatar_for current_expert %>
@@ -10,16 +20,18 @@
 		<h1>
 			<%= current_expert.first_name %>
 		</h1>
+
 		<span>
-			<%= link_to "view my profile", current_expert %>
+			<%= link_to "view my profile", current_expert %><br/>
 		</span>
 		<span>
-			<%= pluralize(current_expert.posts.count, "posts") %>
+			<%= pluralize(current_expert.posts.count, "posts") %><br/><br/><hr/>
 		</span>
+		
       </section>
       <section>
 			<%= form_for(@post) do |f| %>
-
+			<%= render 'shared/error_messages', object: f.object %>
 		  <div class="field">
 			<%= f.text_area :content, placeholder: "Compose new micropost..." %>
 		  </div>
@@ -28,13 +40,12 @@
       </section>
     </aside>
 
-	<div class="span8">
-      <h3>Micropost Feed</h3>
+	<div class="span10">
+      <h3>Post Feed</h3>
       <%= render 'shared/feed' %>
     </div>
   </div>  
 <% else %>
-	<h1>Index#home_page</h1>
-	<p>Find me in app/views/index/home_page.html.erb</p>
+
 <% end %> 
 

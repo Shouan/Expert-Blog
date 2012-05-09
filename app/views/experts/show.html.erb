@@ -1,7 +1,26 @@
 <% provide(:title, @expert.first_name) %>
-<p id="notice"><%= notice %></p>
 
+<article class="main_display">
+  <img src="/assets/logo.png"/>
+  <div class="display_gloss"></div>
+  <article class="banner_new">
+    <p>New</p>
+  </article>
+</article>
+<article class="feature_text">
+  <h2>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.</h2>
+  <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Integer posuere erat a ante venenatis dapibus posuere maecenas faucibus mollis interdum. Velit aliquet. Maecenas faucibus mollis posuere velit aliquet interdum.</p>
+</article>
+
+<div class="row">
+  <aside class="span8">
+<p id="notice"><%= notice %></p>
+<table>
+<tr>
+<td>
 <%= gravatar_for @expert %>
+</td>
+<td>
 <p>
   <b>First name:</b>
   <%= @expert.first_name %>
@@ -31,15 +50,21 @@
   <b>Professional bio:</b>
   <%= @expert.professional_bio %>
 </p>
+</td>
+</tr>
+</table>
 
-  <div class="span8">
+<div  >
+  <div >
     <% if @expert.posts.any? %>
       <h3>Posts (<%= @expert.posts.count %>)</h3>
-      <ol class="microposts">
+      <ol class="posts">
         <%= render @posts %>
       </ol>
       <%= will_paginate @posts %>
     <% end %>
   </div>
-<%= link_to 'Edit', edit_expert_path(@expert) %> |
-<%= link_to 'Back', experts_path %>
+  </div>
+  </div>
+  </div>
+
